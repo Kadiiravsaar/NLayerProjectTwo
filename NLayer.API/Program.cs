@@ -2,11 +2,11 @@ using Microsoft.EntityFrameworkCore;
 using NLayer.Core.Repositories;
 using NLayer.Core.UnitOfWorks;
 using NLayer.Repository.Repositories;
-using NLayer.Service.Services;
 using NLayer.Repository.UnitOfWorks;
 using NLayer.Repository;
 using System.Reflection;
 using NLayer.Core.Services;
+using NLayer.Service.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,8 +20,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-
-builder.Services.AddScoped(typeof(IService<>), typeof(Service<>));
+builder.Services.AddScoped(typeof(IService<>),typeof(Service<>));
 
 
 
