@@ -1,4 +1,6 @@
-﻿using NLayer.Core.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using NLayer.Core.DTOs;
+using NLayer.Core.Models;
 using NLayer.Core.Repositories;
 using System;
 using System.Collections.Generic;
@@ -12,6 +14,11 @@ namespace NLayer.Repository.Repositories
     {
         public ProductRepository(AppDbContext context) : base(context)
         {
+        }
+
+        public async Task<List<Product>> ProductsWithCategory()
+        {
+            return await _context.Products.Include(x => x.Category).ToListAsync();
         }
     }
 }
