@@ -20,12 +20,23 @@ builder.Services.AddSwaggerGen();
 
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+// Repository Start
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 builder.Services.AddScoped(typeof(IProductRepository), typeof(ProductRepository));
-builder.Services.AddScoped(typeof(IService<>),typeof(Service<>));
-builder.Services.AddTransient(typeof(IProductService),typeof(ProductService));
+//builder.Services.AddScoped(typeof(ICategoryRepository), typeof(CategoryRepository));
 
-//builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+// Repository End
+
+
+// Service Start
+builder.Services.AddScoped(typeof(IService<>),typeof(Service<>));
+builder.Services.AddScoped(typeof(IProductService),typeof(ProductService));
+//builder.Services.AddScoped(typeof(ICategoryService),typeof(CategoryService));
+
+// Service End
+
+
 builder.Services.AddAutoMapper(typeof(MapProfile));
 
 

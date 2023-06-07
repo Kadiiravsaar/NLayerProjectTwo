@@ -40,7 +40,6 @@ namespace NLayer.Core.DTOs
             };
         }
 
-
         public static CustomResponseDto<T> Fail( string error)
         {
             return new CustomResponseDto<T>
