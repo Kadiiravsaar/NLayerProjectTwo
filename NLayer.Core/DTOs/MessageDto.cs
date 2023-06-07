@@ -6,16 +6,19 @@ using System.Threading.Tasks;
 
 namespace NLayer.Core.DTOs
 {
-    public class MessageDto<T>
+    public class MessageDto<T> 
     {
         public string Mesaj { get; set; }
+        public int StatusCode { get; set; }
+     
 
-        public static MessageDto<T> Message(string message)
+        public static MessageDto<T> Message(string message,int statusCode)
         {
 
             return new MessageDto<T>()
             {
-                Mesaj = message
+                Mesaj = message,
+                StatusCode = statusCode
             };
             
            
