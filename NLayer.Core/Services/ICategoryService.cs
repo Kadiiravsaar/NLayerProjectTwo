@@ -10,7 +10,7 @@ namespace NLayer.Core.Services
 {
     public interface ICategoryService : IService<Category>
     {
-        Task<List<CategoryWithProductsDto>> CategoryWithProducts();
+        Task<List<CategoryWithProductsDto>> GetSingleCategoryByIdWithProductsAsync(int categoryId);
 
     }
 }
