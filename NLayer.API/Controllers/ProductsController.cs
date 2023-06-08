@@ -33,9 +33,9 @@ namespace NLayer.API.Controllers
         {
           
             var products = await _service.GetAllAsync();
-            if (products.Count()<30)
+            if (products.Count()<0)
             {
-                return Ok(MessageDto<NoContentDto>.Message("neler neler", 204));
+                return Ok(MessageDto<NoContentDto>.Message("Böyle bir şey yok arkadaş", 204));
 
             }
             var prodsDto = _mapper.Map<List<ProductDto>>(products.ToList());

@@ -21,7 +21,14 @@ namespace NLayer.Core.DTOs
                 StatusCode = statusCode
             };
             
-           
+        }
+
+        public static MessageDto<T> Message(string message)
+        {
+            return new MessageDto<T>
+            {
+                Mesaj = message
+            };
         }
     }
 }

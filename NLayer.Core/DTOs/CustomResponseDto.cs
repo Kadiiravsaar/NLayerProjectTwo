@@ -11,7 +11,7 @@ namespace NLayer.Core.DTOs
         public T Data { get; set; }
         public List<string> Error { get; set; }
         public int StatusCode { get; set; }
-        public string Message { get; set; }
+        public string Message { get; set; } = "Default mesaj";
 
         public static CustomResponseDto<T> Success(int statusCode, T data)
         {
