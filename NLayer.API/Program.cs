@@ -24,7 +24,7 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 // Repository Start
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 builder.Services.AddScoped(typeof(IProductRepository), typeof(ProductRepository));
-//builder.Services.AddScoped(typeof(ICategoryRepository), typeof(CategoryRepository));
+builder.Services.AddScoped(typeof(ICategoryRepository), typeof(CategoryRepository));
 
 // Repository End
 
@@ -32,7 +32,7 @@ builder.Services.AddScoped(typeof(IProductRepository), typeof(ProductRepository)
 // Service Start
 builder.Services.AddScoped(typeof(IService<>),typeof(Service<>));
 builder.Services.AddScoped(typeof(IProductService),typeof(ProductService));
-//builder.Services.AddScoped(typeof(ICategoryService),typeof(CategoryService));
+builder.Services.AddScoped(typeof(ICategoryService), typeof(CategoryService));
 
 // Service End
 
