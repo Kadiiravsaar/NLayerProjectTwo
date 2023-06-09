@@ -8,12 +8,17 @@ using System.Reflection;
 using NLayer.Core.Services;
 using NLayer.Service.Services;
 using NLayer.Service.Mapping;
+using FluentValidation.AspNetCore;
+using NLayer.Service.Validations;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddFluentValidation(x => x.RegisterValidatorsFromAssemblyContaining<ProductDtoValidator>());
+ // AddFluentValidation Eklemek istiyorsan api katmanýna da fluentvaldation eklemen lazým
+
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
