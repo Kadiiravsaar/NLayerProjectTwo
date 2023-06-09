@@ -19,8 +19,4 @@
     <ProjectReference Include="..\NLayer.Service\NLayer.Service.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Filter\" />
-  </ItemGroup>
-
 </Project>

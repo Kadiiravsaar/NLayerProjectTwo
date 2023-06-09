@@ -65,7 +65,7 @@ namespace NLayer.API.Controllers
         {
             var product = await _service.GetByIdAsync(id);
             await _service.RemoveAsync(product);
-            return Ok(CustomResponseDto<ProductDto>.Success(204));
+            return Ok(CustomResponseDto<ProductDto>.Success(200));
         }
 
         [HttpPut("UpdateProd")]
