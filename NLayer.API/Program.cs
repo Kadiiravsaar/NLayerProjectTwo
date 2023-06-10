@@ -12,6 +12,7 @@ using FluentValidation.AspNetCore;
 using NLayer.Service.Validations;
 using Microsoft.AspNetCore.Mvc;
 using NLayer.API.Filters;
+using NLayer.API.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -78,6 +79,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCustomException();
 
 app.UseAuthorization();
 
