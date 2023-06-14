@@ -18,7 +18,7 @@ namespace NLayer.API.Filters
         #endregion
         // amacım şu => daha controllera gelmeden kontrol et
         private readonly IService<T> _service;
-
+        // eğer bir filer ctorda servici veya classı DI olarak geçerse bunu program.cs eklemen lazım
         public NotFoundFilter(IService<T> service)
         {
             _service = service;
