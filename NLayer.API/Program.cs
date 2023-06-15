@@ -13,6 +13,9 @@ using NLayer.Service.Validations;
 using Microsoft.AspNetCore.Mvc;
 using NLayer.API.Filters;
 using NLayer.API.Middlewares;
+using Autofac.Extensions.DependencyInjection;
+using Autofac;
+using NLayer.API.Modules;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -40,27 +43,28 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped(typeof(NotFoundFilter<>));
+builder.Services.AddAutoMapper(typeof(MapProfile));
 
 
-builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+//builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 // Repository Start
-builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-builder.Services.AddScoped(typeof(IProductRepository), typeof(ProductRepository));
-builder.Services.AddScoped(typeof(ICategoryRepository), typeof(CategoryRepository));
+//builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+//builder.Services.AddScoped(typeof(IProductRepository), typeof(ProductRepository));
+//builder.Services.AddScoped(typeof(ICategoryRepository), typeof(CategoryRepository));
 
 // Repository End
 
 
 // Service Start
-builder.Services.AddScoped(typeof(IService<>),typeof(Service<>));
-builder.Services.AddScoped(typeof(IProductService),typeof(ProductService));
-builder.Services.AddScoped(typeof(ICategoryService), typeof(CategoryService));
+//builder.Services.AddScoped(typeof(IService<>),typeof(Service<>));
+//builder.Services.AddScoped(typeof(IProductService),typeof(ProductService));
+//builder.Services.AddScoped(typeof(ICategoryService), typeof(CategoryService));
 
 // Service End
 
 
-builder.Services.AddAutoMapper(typeof(MapProfile));
 
 
 builder.Services.AddDbContext<AppDbContext>(x =>
@@ -70,6 +74,11 @@ builder.Services.AddDbContext<AppDbContext>(x =>
         option.MigrationsAssembly(Assembly.GetAssembly(typeof(AppDbContext)).GetName().Name);
     });
 });
+
+builder.Host.UseServiceProviderFactory
+    (new AutofacServiceProviderFactory());
+builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder => containerBuilder.RegisterModule(new RepoServiceModule()));
+
 
 var app = builder.Build();
 
