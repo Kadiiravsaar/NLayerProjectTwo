@@ -12,7 +12,7 @@ namespace NLayer.API.Middlewares
             app.UseExceptionHandler(config =>
             {
 
-                config.Run(async context =>
+                config.Run(async context => // sonlandırıcı Middleware
                 {
                     context.Response.ContentType = "application/json";
 
