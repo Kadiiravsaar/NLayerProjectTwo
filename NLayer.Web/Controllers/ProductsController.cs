@@ -9,7 +9,7 @@ namespace NLayer.Web.Controllers
         private readonly IProductService _service;
         private readonly ICategoryService _categoryService;
 
-        public ProductsController(IProductService service , ICategoryService categoryService)
+        public ProductsController(IProductService service, ICategoryService categoryService)
         {
             _service = service;
             _categoryService = categoryService;
@@ -23,7 +23,7 @@ namespace NLayer.Web.Controllers
         public async Task<IActionResult> Save(Product product)
         {
             return View(await _service.AddAsync(product));
-            
+
         }
     }
 }
