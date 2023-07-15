@@ -7,12 +7,7 @@ using NLayer.Core.Repositories;
 using NLayer.Core.Services;
 using NLayer.Core.UnitOfWorks;
 using NLayer.Service.Exceptions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NLayer.Caching
 {
@@ -34,7 +29,7 @@ namespace NLayer.Caching
             if (!_memoryCache.TryGetValue(CacheProdKey, out _))
             {
                 _memoryCache.Set(CacheProdKey, _repository.ProductsWithCategory().Result);
-                
+
             }
 
         }
@@ -90,7 +85,7 @@ namespace NLayer.Caching
 
         public async Task RemoveAsync(Product entity)
         {
-             _repository.Remove(entity);
+            _repository.Remove(entity);
             await _unitOfWork.CommitAsync();
             await CacheAllProductsAsync();
 
@@ -117,7 +112,7 @@ namespace NLayer.Caching
 
         public async Task CacheAllProductsAsync()
         {
-             _memoryCache.Set(CacheProdKey, await _repository.GetAll().ToListAsync());
+            _memoryCache.Set(CacheProdKey, await _repository.GetAll().ToListAsync());
         }
     }
 }

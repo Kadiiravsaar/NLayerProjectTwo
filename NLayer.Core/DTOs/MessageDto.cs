@@ -1,18 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace NLayer.Core.DTOs
+﻿namespace NLayer.Core.DTOs
 {
-    public class MessageDto<T> 
+    public class MessageDto<T>
     {
         public string Mesaj { get; set; }
         public int StatusCode { get; set; }
-     
 
-        public static MessageDto<T> Message(string message,int statusCode)
+
+        public static MessageDto<T> Message(string message, int statusCode)
         {
 
             return new MessageDto<T>()
@@ -20,7 +14,7 @@ namespace NLayer.Core.DTOs
                 Mesaj = message,
                 StatusCode = statusCode
             };
-            
+
         }
 
         public static MessageDto<T> Message(string message)
