@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using NLayer.Core.DTOs;
 using NLayer.Core.Models;
 using NLayer.Core.Services;
-using NLayer.Service.Validations;
 
 namespace NLayer.Web.Controllers
 {
@@ -21,7 +20,7 @@ namespace NLayer.Web.Controllers
             _mapper = mapper;
         }
 
-        
+
         public async Task<IActionResult> Index()
         {
             return View(await _service.ProductsWithCategory());
@@ -45,7 +44,7 @@ namespace NLayer.Web.Controllers
 
             if (ModelState.IsValid)
             {
-               await _service.AddAsync(_mapper.Map<Product>(productDto));
+                await _service.AddAsync(_mapper.Map<Product>(productDto));
                 return RedirectToAction(nameof(Index));
 
             }
@@ -110,3 +109,4 @@ namespace NLayer.Web.Controllers
         //    }
         //}
     }
+}
