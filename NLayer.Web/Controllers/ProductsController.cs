@@ -31,82 +31,30 @@ namespace NLayer.Web.Controllers
         public async Task<IActionResult> Save()
         {
             var categories = await _categoryService.GetAllAsync();
-            var categoryDto = _mapper.Map<List<CategoryDto>>(categories).ToList();
+            var categoryDto = _mapper.Map<List<Category>>(categories.ToList());
+
+            ViewBag.categories = new SelectList(categoryDto, "Id", "Name"); // dropdownList bu 1. Bana bir liste ver(categories)- 2. dropdan bir şey seçildiğinde ben ıd göstericem. - 3. kullanıcılar neyi görecek (name)   
             return View();
+
+
         }
-
-
 
         [HttpPost]
         public async Task<IActionResult> Save(ProductDto productDto)
         {
 
-
-            if (ModelState.IsValid)
+            if (ModelState.IsValid) // name price stock geçerli ise eyvalla gel
             {
                 await _service.AddAsync(_mapper.Map<Product>(productDto));
                 return RedirectToAction(nameof(Index));
-
             }
 
             var categories = await _categoryService.GetAllAsync();
-            var categoryDto = _mapper.Map<List<CategoryDto>>(categories).ToList();
-            ViewBag.categories = new SelectList(categoryDto, "Id", "Name");
+            var categoryDto = _mapper.Map<List<Category>>(categories.ToList());
+            ViewBag.categories = new SelectList(categoryDto, "Id", "Name"); // dropdownList bu 1. Bana bir liste ver(categories)- 2. dropdan bir şey seçildiğinde ben ıd göstericem. - 3. kullanıcılar neyi görecek (name)   
             return View();
+
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        //    [HttpGet]
-        //    public async Task<IActionResult> Save()
-        //    {
-        //        var categories = await _categoryService.GetAllAsync();
-        //        var categoryDto = _mapper.Map<List<Category>>(categories.ToList());
-
-        //        ViewBag.categories = new SelectList(categoryDto, "Id", "Name"); // dropdownList bu 1. Bana bir liste ver(categories)- 2. dropdan bir şey seçildiğinde ben ıd göstericem. - 3. kullanıcılar neyi görecek (name)   
-        //        return View();
-
-
-        //    }
-
-        //    [HttpPost]
-        //    public async Task<IActionResult> Save(ProductDto productDto)
-        //    {
-
-        //        if (ModelState.IsValid) // name price stock geçerli ise eyvalla gel
-        //        {
-        //           await _service.AddAsync(_mapper.Map<Product>(productDto));
-        //            return RedirectToAction(nameof(Index));
-        //        }
-
-        //        var categories = await _categoryService.GetAllAsync();
-        //        var categoryDto = _mapper.Map<List<Category>>(categories.ToList());
-        //        ViewBag.categories = new SelectList(categoryDto, "Id", "Name"); // dropdownList bu 1. Bana bir liste ver(categories)- 2. dropdan bir şey seçildiğinde ben ıd göstericem. - 3. kullanıcılar neyi görecek (name)   
-        //        return View();
-
-        //    }
-        //}
     }
 }
+
