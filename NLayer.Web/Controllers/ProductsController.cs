@@ -58,6 +58,7 @@ namespace NLayer.Web.Controllers
 
 
         [HttpGet]
+        [ServiceFilter(typeof(NotFoundFilter<Product>))]
         public async Task<IActionResult> Update(int id)
         {
             var prod = await _service.GetByIdAsync(id);
