@@ -88,6 +88,22 @@ namespace NLayer.Web.Controllers
 
 
         }
+
+
+        [HttpGet]
+        public async Task<IActionResult> Remove(int id)
+        {
+            var prod = await _service.GetByIdAsync(id);
+            if (ModelState.IsValid)
+            {
+
+                await _service.RemoveAsync(prod);
+                return RedirectToAction(nameof(Index));
+            }
+            return View();
+
+
+        }
     }
 }
 
