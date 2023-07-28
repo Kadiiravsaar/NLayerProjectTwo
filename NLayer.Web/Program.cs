@@ -32,6 +32,13 @@ builder.Services.AddHttpClient<ProductApiService>(opt =>
 });
 
 
+builder.Services.AddHttpClient<CategoryApiService>(opt =>
+{
+    opt.BaseAddress = new Uri(builder.Configuration["BaseUrl"]);
+});
+
+
+
 builder.Services.AddScoped(typeof(NotFoundFilter<>));
 
 builder.Host.UseServiceProviderFactory
