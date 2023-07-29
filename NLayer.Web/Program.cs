@@ -26,10 +26,19 @@ builder.Services.AddDbContext<AppDbContext>(x =>
 });
 
 
+builder.Services.AddHttpClient<CategoryApiService>(opt =>
+{
+    opt.BaseAddress = new Uri(builder.Configuration["BaseUrl"]);
+});
+
+
 builder.Services.AddHttpClient<ProductApiService>(opt =>
 {
     opt.BaseAddress = new Uri(builder.Configuration["BaseUrl"]);
 });
+
+
+
 
 
 builder.Services.AddScoped(typeof(NotFoundFilter<>));
