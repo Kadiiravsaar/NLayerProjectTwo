@@ -23,7 +23,7 @@ namespace NLayer.API.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet("ProdWithCategory")]
+        [HttpGet("[action]")] // action demek şu isimle  ProdWithCategory  istek yap demek
         public async Task<IActionResult> ProdWithCategory()
         {
             return Ok(await _service.ProductsWithCategory());
