@@ -20,7 +20,7 @@ namespace NLayer.API.Controllers
             _categoryService = categoryService;
         }
 
-        [HttpGet("GetAll")]
+        [HttpGet("[action]")]
         public async Task<IActionResult> GetAllCategories()
         {
             var category = await _categoryService.GetAllAsync();
@@ -53,7 +53,7 @@ namespace NLayer.API.Controllers
         }
 
 
-        [HttpPut("updateCategory")]
+        [HttpPut]
         public async Task<IActionResult> UpdateCategory(CategoryDto categoryDto)
         {
             await _categoryService.UpdateAsync(_mapper.Map<Category>(categoryDto));

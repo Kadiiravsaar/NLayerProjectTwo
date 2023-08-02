@@ -1,4 +1,5 @@
 ﻿using NLayer.Core.DTOs;
+using System.Net.Http.Json;
 
 namespace NLayer.Web.Services
 {
@@ -11,9 +12,10 @@ namespace NLayer.Web.Services
             _httpClient = httpClient;
         }
 
-        public async Task<List<ProductWithCategoryDto>> GetProductWithCategoryDto()
+        public async Task<List<ProductWithCategoryDto>> GetProductsWithCategory()
         {
-            var response = await _httpClient.GetFromJsonAsync<CustomResponseDto<List<ProductWithCategoryDto>>>("ProdWithCategory");
+            var response = await _httpClient.GetFromJsonAsync<CustomResponseDto<List<ProductWithCategoryDto>>>("products/GetProductsWithCategory");
+
             return response.Data;
 
             // GetFromJsonAsync direk datayı json olarak almamızı sağlar
@@ -22,18 +24,41 @@ namespace NLayer.Web.Services
             // <Apiden o controllerda nasıl beklediğine bağlı (<CustomResponseDto<List<ProductWithCategoryDto>>>)> bu beklemiş olduğun tiptir
 
             // nereye istek yapmak istiyorsun bunu veriyor <>(Burada) ("ProdWithCategory")
+
         }
 
-
-        public async Task<ProductDto> Save(ProductDto newProduct)
+        public async Task<ProductDto> SaveAsync(ProductDto newProduct)
         {
-            var response = await _httpClient.PostAsJsonAsync("addProduct", newProduct);
+            var response = await _httpClient.PostAsJsonAsync("products", newProduct);
 
-            if (!response.IsSuccessStatusCode) return null; // burayı geçerse tamam demektir
+            if (!response.IsSuccessStatusCode) return null;
 
             var responseBody = await response.Content.ReadFromJsonAsync<CustomResponseDto<ProductDto>>();
 
             return responseBody.Data;
+
+
+        }
+
+        public async Task<ProductDto> GetById(int id)
+        {
+            var response = await _httpClient.GetFromJsonAsync<CustomResponseDto<ProductDto>>($"products/{id}");
+            return response.Data;
+        }
+
+        public  async Task<bool> Update(ProductDto newProduct)
+        {
+            var response = await _httpClient.PutAsJsonAsync("products", newProduct);
+            return response.IsSuccessStatusCode;
+
+        }
+
+        public async Task<bool> Remove(int id)
+        {
+            var response = await _httpClient.DeleteAsync($"products/{id}");
+            return response.IsSuccessStatusCode;
+
         }
     }
+
 }
