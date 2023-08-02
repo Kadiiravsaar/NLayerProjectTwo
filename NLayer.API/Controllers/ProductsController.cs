@@ -24,41 +24,40 @@ namespace NLayer.API.Controllers
         }
 
         [HttpGet("[action]")] // action demek şu isimle  ProdWithCategory  istek yap demek
-        public async Task<IActionResult> ProdWithCategory()
+        public async Task<IActionResult> GetProductsWithCategory()
         {
             return Ok(await _service.ProductsWithCategory());
         }
 
+
+
         [HttpGet]
         public async Task<IActionResult> GetAllProducts()
         {
-          
-            var products = await _service.GetAllAsync();
-            if (products.Count()<0)
-            {
-                return Ok(MessageDto<NoContentDto>.Message("Böyle bir şey yok arkadaş", 204));
 
-            }
-            var prodsDto = _mapper.Map<List<ProductDto>>(products.ToList());
-            return Ok(CustomResponseDto<List<ProductDto>>.Success(200, prodsDto));
+            var products = await _service.GetAllAsync();
+            var productsDtos = _mapper.Map<List<ProductDto>>(products.ToList());
+            return Ok(CustomResponseDto<List<ProductDto>>.Success(200, productsDtos));
         }
 
-        [HttpPost("addProduct")]
+
+        [HttpPost]
         public async Task<IActionResult> AddProduct(ProductDto productDto)
         {
-            var products = await _service.AddAsync(_mapper.Map<Product>(productDto));
-            var prodsDto = _mapper.Map<ProductDto>(products);
-            return Ok(CustomResponseDto<ProductDto>.Success(200, prodsDto));
+            var product = await _service.AddAsync(_mapper.Map<Product>(productDto));
+            var productsDto = _mapper.Map<ProductDto>(product);
+            return Ok(CustomResponseDto<ProductDto>.Success(200, productsDto));
         }
 
         [ServiceFilter(typeof(NotFoundFilter<Product>))] //  [ValidateFilter] yazarak kullanamazsın çünkü NotFoundFilter bir attrribute sınıfını miras almaz, validatefilter alır git bak
+       
         [HttpGet("{id}")]
         // api/products/5
         public async Task<IActionResult> GetById(int id)
         {
             var product = await _service.GetByIdAsync(id);
-            var productDto = _mapper.Map<ProductDto>(product);
-            return Ok(CustomResponseDto<ProductDto>.Success(200, productDto));
+            var productsDto = _mapper.Map<ProductDto>(product);
+            return Ok(CustomResponseDto<ProductDto>.Success(200, productsDto));
 
         }
 
@@ -66,17 +65,18 @@ namespace NLayer.API.Controllers
         public async Task<IActionResult> DeleteProduct(int id)
         {
             var product = await _service.GetByIdAsync(id);
+
             await _service.RemoveAsync(product);
+
             return Ok(CustomResponseDto<ProductDto>.Success(200));
         }
 
-        [HttpPut("UpdateProd")]
+        [HttpPut]
         public async Task<IActionResult> UpdateProduct(ProductDto productDto)
         {
-            await _service.UpdateAsync(_mapper.Map<Product>(productDto));
+             await _service.UpdateAsync(_mapper.Map<Product>(productDto));
             return Ok(CustomResponseDto<ProductUpdateDto>.Success(204));
         }
-
 
 
     }
