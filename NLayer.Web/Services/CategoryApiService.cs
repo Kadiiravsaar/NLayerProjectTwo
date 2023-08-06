@@ -19,10 +19,10 @@ namespace NLayer.Web.Services
 
         public async Task<CategoryDto> Save(CategoryDto newCat)
         {
-            var response = await _httpClient.PostAsJsonAsync("Categories/addCategory",newCat);
+            var response = await _httpClient.PostAsJsonAsync("Categories/addCategory", newCat);
             if (!response.IsSuccessStatusCode) return null;
 
-        
+
             var responseBody = await response.Content.ReadFromJsonAsync<CustomResponseDto<CategoryDto>>();
             return responseBody.Data;
         }

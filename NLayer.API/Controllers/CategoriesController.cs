@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NLayer.Core.DTOs;
 using NLayer.Core.Models;
@@ -62,7 +61,7 @@ namespace NLayer.API.Controllers
         }
 
 
-        [HttpGet("{id}")] 
+        [HttpGet("{id}")]
         public async Task<IActionResult> GetByIdCategory(int id)
         {
             var getIdByCategory = await _categoryService.GetByIdAsync(id);

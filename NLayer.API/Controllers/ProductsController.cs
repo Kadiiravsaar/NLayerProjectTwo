@@ -1,12 +1,9 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NLayer.API.Filters;
 using NLayer.Core.DTOs;
 using NLayer.Core.Models;
 using NLayer.Core.Services;
-using NLayer.Service.Services;
-using System.Collections.Generic;
 
 namespace NLayer.API.Controllers
 {
@@ -50,7 +47,7 @@ namespace NLayer.API.Controllers
         }
 
         [ServiceFilter(typeof(NotFoundFilter<Product>))] //  [ValidateFilter] yazarak kullanamazsın çünkü NotFoundFilter bir attrribute sınıfını miras almaz, validatefilter alır git bak
-       
+
         [HttpGet("{id}")]
         // api/products/5
         public async Task<IActionResult> GetById(int id)
@@ -74,7 +71,7 @@ namespace NLayer.API.Controllers
         [HttpPut]
         public async Task<IActionResult> UpdateProduct(ProductDto productDto)
         {
-             await _service.UpdateAsync(_mapper.Map<Product>(productDto));
+            await _service.UpdateAsync(_mapper.Map<Product>(productDto));
             return Ok(CustomResponseDto<ProductUpdateDto>.Success(204));
         }
 
