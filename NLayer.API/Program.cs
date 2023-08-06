@@ -1,21 +1,15 @@
-using Microsoft.EntityFrameworkCore;
-using NLayer.Core.Repositories;
-using NLayer.Core.UnitOfWorks;
-using NLayer.Repository.Repositories;
-using NLayer.Repository.UnitOfWorks;
-using NLayer.Repository;
-using System.Reflection;
-using NLayer.Core.Services;
-using NLayer.Service.Services;
-using NLayer.Service.Mapping;
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
 using FluentValidation.AspNetCore;
-using NLayer.Service.Validations;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using NLayer.API.Filters;
 using NLayer.API.Middlewares;
-using Autofac.Extensions.DependencyInjection;
-using Autofac;
 using NLayer.API.Modules;
+using NLayer.Repository;
+using NLayer.Service.Mapping;
+using NLayer.Service.Validations;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 

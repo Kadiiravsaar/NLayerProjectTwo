@@ -1,5 +1,4 @@
 ﻿using NLayer.Core.DTOs;
-using System.Net.Http.Json;
 
 namespace NLayer.Web.Services
 {
@@ -46,7 +45,7 @@ namespace NLayer.Web.Services
             return response.Data;
         }
 
-        public  async Task<bool> Update(ProductDto newProduct)
+        public async Task<bool> Update(ProductDto newProduct)
         {
             var response = await _httpClient.PutAsJsonAsync("products", newProduct);
             return response.IsSuccessStatusCode;

@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using NLayer.Core.DTOs;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Model;
-using System.Security.Cryptography;
 
 namespace NLayer.API.Filters
 {

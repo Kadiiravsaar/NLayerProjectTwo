@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc.Filters;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
 using NLayer.Core.DTOs;
-using NLayer.Core.Services;
 using NLayer.Core.Models;
+using NLayer.Core.Services;
 
 namespace NLayer.Web
 {
